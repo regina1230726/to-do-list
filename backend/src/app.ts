@@ -1,0 +1,37 @@
+import express from "express";
+import mongoose from "mongoose";
+import taskRoutes from "./routes/TaskRoute";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const app = express();
+
+// ---------- Middlewares ----------
+app.use(express.json());
+
+// ---------- Routes ----------
+app.use("/api/tasks", taskRoutes);
+
+// ---------- Health check ----------
+app.get("/health", (_req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
+// ---------- MongoDB ----------
+const mongoUri = process.env.MONGO_URI;
+
+if (!mongoUri) {
+  throw new Error("MONGO_URI not defined");
+}
+
+mongoose
+  .connect(mongoUri)
+  .then(() => {
+    console.log("MongoDB connected");
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
+
+export default app;
