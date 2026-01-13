@@ -1,9 +1,22 @@
 #!/bin/bash
 
-echo "Starting backend..."
-gnome-terminal -- bash -c "cd backend && npm run dev; exec bash" &
+# Backend
+echo "Backend"
+cd backend || exit
+npm install
+npm run dev &
 
-echo "Starting frontend..."
-gnome-terminal -- bash -c "cd todo-frontend && npm run dev; exec bash" &
+cd ..
 
-echo "Application started!"
+# Frontend
+echo "Frontend"
+cd todo-frontend || exit
+npm install
+npm run dev &
+
+echo ""
+echo "Backend e Frontend estão a correr"
+echo "Frontend: http://localhost:5174"
+echo "Backend: http://localhost:3000/api"
+
+wait
