@@ -15,6 +15,7 @@ export class Task {
   ) {}
 
   complete() {
+    if (this.status.getValue() === TaskStatusEnum.COMPLETED) return;
     this.status = new TaskStatus(TaskStatusEnum.COMPLETED);
   }
 }

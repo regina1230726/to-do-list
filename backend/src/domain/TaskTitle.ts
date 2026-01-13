@@ -3,7 +3,7 @@ export class TaskTitle {
 
   constructor(value: string) {
     if (!value || value.trim().length < 3) {
-      throw new Error("Task title must have at least 3 characters");
+      throw new Error("O título da tarefa deve ter pelo menos 3 caracteres");
     }
     this.value = value;
   }

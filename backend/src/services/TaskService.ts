@@ -28,12 +28,13 @@ export class TaskService {
   }
 
   async complete(id: string) {
-    const task = await this.taskRepo.findById(id);
-    if (!task) throw new Error("Task not found");
+  const task = await this.taskRepo.findById(id);
+  if (!task) throw new Error("Task not found");
 
-    task.complete();
-    return this.taskRepo.save(task);
-  }
+  task.complete();
+
+  return this.taskRepo.save(task);
+}
 
   async delete(id: string) {
     return this.taskRepo.delete(id);

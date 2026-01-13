@@ -2,12 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import taskRoutes from "./routes/TaskRoute";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 
 // ---------- Middlewares ----------
+app.use(cors()); // 👈 ISTO FALTAVA
 app.use(express.json());
 
 // ---------- Routes ----------
@@ -33,5 +35,14 @@ mongoose
   .catch((err) => {
     console.error("MongoDB connection error:", err);
   });
+
+app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error(err);
+
+  res.status(400).json({
+    error: err.message || "Erro inesperado"
+  });
+});
+
 
 export default app;
