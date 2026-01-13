@@ -207,6 +207,5 @@ chmod +x run.sh
 
 ## Autor
 
-Projeto desenvolvido por **[Regina Silva]**
-No âmbito de um desafio técnico Full-Stack.
+Projeto desenvolvido por **Regina Silva** no âmbito de um desafio técnico Full-Stack.
 
